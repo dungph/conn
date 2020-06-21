@@ -1,0 +1,12 @@
+[package]
+name = "conn"
+version = "0.1.0"
+authors = ["Dung Ph <dungph@zoho.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+libp2p-core = "0.19.1"
+futures = "0.3.5"
+async-lock = "1.1.2"
