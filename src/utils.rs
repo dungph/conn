@@ -4,14 +4,14 @@ use {
     std::{
         task::Context,
     },
-
 };
 
-pub type DynStream<I> = std::pin::Pin<Box<dyn Stream<Item = Result<I, Error>>>>;
-pub type DynFuture<O> = std::pin::Pin<Box<dyn Future<Output = Result<O, Error>>>>;
-pub type DynIo = std::pin::Pin<Box<dyn IO>>;
+pub type DynStream = std::pin::Pin<Box<dyn Stream<Item = Result<DynFuture, Error>> + Send>>;
+pub type DynFuture = std::pin::Pin<Box<dyn Future<Output = Result<DynIO, Error>> + Send>>;
+pub type DynIO = std::pin::Pin<Box<dyn IO>>;
 
 
-pub trait IO: AsyncRead + AsyncWrite {}
 
+pub trait IO: AsyncRead + AsyncWrite + Send + 'static {}
+impl<T: AsyncRead + AsyncWrite + Send + 'static> IO for T {}
 
